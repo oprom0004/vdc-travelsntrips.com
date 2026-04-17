@@ -1,20 +1,37 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# travelsntrips.com - Variable DC Power Supply SEO Site
 
-# Run and deploy your AI Studio app
+This project is a Next.js SEO website focused on the core keyword **variable dc power supply** and long-tail industrial keyword pages.
 
-This contains everything you need to run your app locally.
+For online ordering, pricing, and inquiry support, visit [variabledcpowersupply.com](https://variabledcpowersupply.com).
 
-View your app in AI Studio: https://ai.studio/apps/280890f6-cc65-462b-ad2b-e2e38e7ec716
+## SEO focus
 
-## Run Locally
+- Core keyword targeting: `variable dc power supply`
+- Programmatic keyword pages for voltage/current/use-case intents
+- Static pre-rendering for crawl-friendly HTML output
+- Canonicalized URLs under `https://travelsntrips.com`
+- Built-in `sitemap.xml` and `robots.txt`
 
-**Prerequisites:**  Node.js
+## Local development
 
+```bash
+npm install
+npm run dev
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Production build
+
+```bash
+npm run build
+```
+
+## Cloudflare Pages deployment (minimal)
+
+- Build command: `npm run build`
+- Build output directory: `out`
+
+## Project structure
+
+- `app/`: routes, metadata, sitemap, robots
+- `components/`: homepage and keyword page UI
+- `lib/`: keyword mapping, SEO constants, content cache access
