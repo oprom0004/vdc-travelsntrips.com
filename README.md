@@ -1,1 +1,1 @@
-variable dc power supply: https://variabledcpowersupply.com
+buy variable dc power supply online: https://variabledcpowersupply.com
