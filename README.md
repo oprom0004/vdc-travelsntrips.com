@@ -1,16 +1,16 @@
-# travelsntrips.com - Variable DC Power Supply SEO Site
+# travelsntrips.com - Variable DC Power Supply
 
-This project is a Next.js SEO website focused on the core keyword **variable dc power supply** and long-tail industrial keyword pages.
+This website is focused on helping buyers find and order the right **variable dc power supply** models quickly.
 
 For online ordering, pricing, and inquiry support, visit [variabledcpowersupply.com](https://variabledcpowersupply.com).
 
-## SEO focus
+## Buy Variable DC Power Supply Online
 
-- Core keyword targeting: `variable dc power supply`
-- Programmatic keyword pages for voltage/current/use-case intents
-- Static pre-rendering for crawl-friendly HTML output
-- Canonicalized URLs under `https://travelsntrips.com`
-- Built-in `sitemap.xml` and `robots.txt`
+- Shop in-stock variable DC power supply models online
+- Get fast bulk quotes for industrial projects
+- Compare voltage, current, and application options by model page
+- Reach product pages quickly from a clean category structure
+- Order or inquire directly via [variabledcpowersupply.com](https://variabledcpowersupply.com)
 
 ## Local development
 
