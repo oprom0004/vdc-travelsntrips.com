@@ -20,6 +20,7 @@ export default function KeywordPage() {
 
   React.useEffect(() => {
     if (pageData) {
+      document.title = pageData.seoTitle;
       const isCorrectContent = content && content.title && content.title.toLowerCase().includes(slug?.toLowerCase() || "");
       
       if (!isCorrectContent) {

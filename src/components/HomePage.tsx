@@ -15,6 +15,7 @@ export default function HomePage() {
   const [loading, setLoading] = React.useState(!homeContent);
 
   React.useEffect(() => {
+    document.title = "Professional Variable DC Power Supply Solutions | eTommens Official Technical Hub";
     if (!homeContent) {
       setLoading(true);
       fetch("/api/content/home")
