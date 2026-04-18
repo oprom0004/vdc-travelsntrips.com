@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import KeywordPage from "@/components/keyword-page";
 import { getKeywordContent } from "@/lib/content";
-import { findKeywordPage, getFrenchKeyword, KEYWORD_PAGES } from "@/lib/site";
+import { findKeywordPage, getFrenchKeyword, hasArabicVariant, KEYWORD_PAGES } from "@/lib/site";
 import { getMessages } from "@/lib/i18n";
 
 const messages = getMessages("fr");
@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       languages: {
         en: `/${page.slug}`,
         fr: `/fr/${page.slug}`,
+        ...(hasArabicVariant(page.slug) ? { ar: `/ar/${page.slug}` } : {}),
       },
     },
     openGraph: {

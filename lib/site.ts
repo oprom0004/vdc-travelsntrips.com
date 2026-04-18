@@ -87,6 +87,21 @@ export const KEYWORD_PAGES: KeywordPageData[] = RAW_KEYWORDS.map(({ kw, cat, pat
   };
 });
 
+const AR_MVP_BASE_SLUGS = [
+  "800v",
+  "high-voltage",
+  "high-precision",
+  "programmable",
+  "rack-mount",
+  "price",
+  "where-to-buy",
+] as const;
+
+const AR_MVP_BASE_SLUG_SET = new Set<string>(AR_MVP_BASE_SLUGS);
+
+export const AR_MVP_SLUGS = KEYWORD_PAGES.filter((page) => AR_MVP_BASE_SLUG_SET.has(page.baseSlug)).map((page) => page.slug);
+const AR_MVP_SLUG_SET = new Set<string>(AR_MVP_SLUGS);
+
 export function findKeywordPage(slug: string) {
   return KEYWORD_PAGES.find((page) => page.slug === slug);
 }
@@ -102,8 +117,14 @@ export function getKeywordImage(baseSlug: string) {
   return SKU_IMAGE_BY_BASE_SLUG[baseSlug] ?? FALLBACK_SKU_IMAGE;
 }
 
-export function getTargetHomeUrl(locale: "en" | "fr" = "en") {
-  return locale === "fr" ? `${TARGET_URL}/fr` : TARGET_URL;
+export function hasArabicVariant(slug: string) {
+  return AR_MVP_SLUG_SET.has(slug);
+}
+
+export function getTargetHomeUrl(locale: "en" | "fr" | "ar" = "en") {
+  if (locale === "fr") return `${TARGET_URL}/fr`;
+  if (locale === "ar") return `${TARGET_URL}/ar`;
+  return TARGET_URL;
 }
 
 export function getFrenchKeyword(page: KeywordPageData): string {
@@ -143,6 +164,42 @@ export function getFrenchShortTitle(page: KeywordPageData): string {
     "price": "PRIX",
     "where-to-buy": "OU ACHETER",
     "how-to-use": "COMMENT UTILISER",
+  };
+
+  return bySlug[page.baseSlug] ?? page.shortTitle;
+}
+
+export function getArabicKeyword(page: KeywordPageData): string {
+  const bySlug: Record<string, string> = {
+    "800v": "مزود طاقة DC متغير 800 فولت",
+    "high-voltage": "مزود طاقة DC متغير عالي الجهد",
+    "high-precision": "مزود طاقة DC متغير عالي الدقة",
+    "programmable": "مزود طاقة DC متغير قابل للبرمجة",
+    "rack-mount": "مزود طاقة DC متغير تركيب راك",
+    "price": "سعر مزود طاقة DC متغير",
+    "where-to-buy": "أماكن شراء مزود طاقة DC متغير",
+  };
+
+  if (bySlug[page.baseSlug]) {
+    return bySlug[page.baseSlug];
+  }
+
+  if (/\d+v$/i.test(page.baseSlug) || /\d+a$/i.test(page.baseSlug) || /\d+w$/i.test(page.baseSlug)) {
+    return `مزود طاقة DC متغير ${page.shortTitle}`;
+  }
+
+  return `مزود طاقة DC متغير ${page.shortTitle}`;
+}
+
+export function getArabicShortTitle(page: KeywordPageData): string {
+  const bySlug: Record<string, string> = {
+    "800v": "800V",
+    "high-voltage": "جهد عال",
+    "high-precision": "دقة عالية",
+    "programmable": "قابل للبرمجة",
+    "rack-mount": "راك",
+    "price": "السعر",
+    "where-to-buy": "أين تشتري",
   };
 
   return bySlug[page.baseSlug] ?? page.shortTitle;

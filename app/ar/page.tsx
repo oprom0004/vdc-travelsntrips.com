@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import HomePage from "@/components/home-page";
 import { getHomeContent } from "@/lib/content";
 import { getMessages } from "@/lib/i18n";
 
-const messages = getMessages("fr");
+const messages = getMessages("ar");
 
 export const metadata: Metadata = {
   title: messages.meta.homeTitle,
   description: messages.meta.homeDescription,
   alternates: {
-    canonical: "/fr",
+    canonical: "/ar",
     languages: {
       en: "/",
       fr: "/fr",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: messages.meta.ogTitle,
     description: messages.meta.ogDescription,
-    url: "https://travelsntrips.com/fr",
+    url: "https://travelsntrips.com/ar",
     siteName: messages.meta.siteName,
   },
   twitter: {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FrPage() {
-  const homeContent = getHomeContent("fr");
-  return <HomePage homeContent={homeContent} locale="fr" />;
+export default function ArPage() {
+  const homeContent = getHomeContent("ar");
+  return <HomePage homeContent={homeContent} locale="ar" />;
 }

@@ -5,24 +5,30 @@ import type { ArticleData } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
 import { getMessages, withLocalePrefix } from "@/lib/i18n";
 import type { KeywordPageData } from "@/lib/site";
-import { getFrenchKeyword, getKeywordImage, getTargetHomeUrl, TARGET_URL } from "@/lib/site";
+import { getArabicKeyword, getFrenchKeyword, getKeywordImage, getTargetHomeUrl, TARGET_URL } from "@/lib/site";
 
 export default function KeywordPage({ pageData, content, locale = "en" }: { pageData: KeywordPageData; content: ArticleData | null; locale?: Locale }) {
   const keywordImage = getKeywordImage(pageData.baseSlug);
   const messages = getMessages(locale);
   const targetHomeUrl = getTargetHomeUrl(locale);
-  const displayKeyword = locale === "fr" ? getFrenchKeyword(pageData) : pageData.keyword;
-  const productUnitLabel = locale === "fr" ? "Unite alimentation DC" : "DC Power Supply Unit";
-  const breadcrumbProduct = locale === "fr" ? "Alimentation DC variable" : "Variable DC Power Supply";
+  const displayKeyword = locale === "fr" ? getFrenchKeyword(pageData) : locale === "ar" ? getArabicKeyword(pageData) : pageData.keyword;
+  const productUnitLabel = locale === "fr" ? "Unite alimentation DC" : locale === "ar" ? "وحدة مزود طاقة DC" : "DC Power Supply Unit";
+  const breadcrumbProduct = locale === "fr" ? "Alimentation DC variable" : locale === "ar" ? "مزود طاقة DC متغير" : "Variable DC Power Supply";
   const fallbackSummary = locale === "fr"
     ? "Source d'alimentation professionnelle a haute stabilite pour essais laboratoire, charge batterie et automatisation industrielle."
+    : locale === "ar"
+      ? "مصدر طاقة احترافي عالي الثبات لاختبارات المختبر وشحن البطاريات والأتمتة الصناعية."
     : "Professional grade high-stability power source designed for laboratory testing, battery charging, and industrial automation.";
-  const fallbackTitle = locale === "fr" ? `Unite programmable ${displayKeyword}` : `Programmable ${pageData.keyword} Unit`;
+  const fallbackTitle = locale === "fr" ? `Unite programmable ${displayKeyword}` : locale === "ar" ? `وحدة ${displayKeyword} قابلة للبرمجة` : `Programmable ${pageData.keyword} Unit`;
   const specLabels = locale === "fr"
     ? ["Tension de sortie", "Courant de sortie", "Resolution", "Interface"]
+    : locale === "ar"
+      ? ["جهد الخرج", "تيار الخرج", "الدقة", "الواجهة"]
     : ["Output Voltage", "Output Current", "Resolution", "Interface"];
   const specValues = locale === "fr"
     ? [`0 - ${pageData.shortTitle}`, "Plage variable", "10mV / 1mA", "RS232 / USB"]
+    : locale === "ar"
+      ? [`0 - ${pageData.shortTitle}`, "نطاق متغير", "10mV / 1mA", "RS232 / USB"]
     : [`0 - ${pageData.shortTitle}`, "Variable Range", "10mV / 1mA", "RS232 / USB"];
 
   return (

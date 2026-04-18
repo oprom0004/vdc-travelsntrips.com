@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "homeTitle": "شراء مزود طاقة DC متغير عبر الإنترنت | المركز التقني الرسمي",
+    "homeDescription": "منصة تقنية لمزودات الطاقة DC المتغيرة تشمل الجهد العالي، الدقة العالية، والنماذج القابلة للبرمجة.",
+    "ogTitle": "شراء مزود طاقة DC متغير عبر الإنترنت",
+    "ogDescription": "مواصفات تقنية وطلبات شراء مباشرة لمزودات طاقة DC المتغيرة الصناعية.",
+    "siteName": "TRAVELSNTRIPS Industrial Tech",
+    "notFoundTitle": "الصفحة غير موجودة",
+    "notFoundDescription": "الصفحة التقنية المطلوبة غير متوفرة."
+  },
+  "ui": {
+    "navCatalog": "الكتالوج",
+    "navApplications": "التطبيقات",
+    "navHighVoltage": "الجهد العالي",
+    "navPrecision": "وحدات عالية الدقة",
+    "navSupport": "الدعم",
+    "navInventory": "المخزون والأسعار",
+    "mobileSupportGuide": "دليل الدعم",
+    "languageSwitch": "EN",
+    "footer": "القسم التقني لموقع travelsntrips.com. جميع الحقوق محفوظة. هندسة طاقة دقيقة للتطبيقات الصناعية.",
+    "homeHeroTitle": "حلول احترافية لمزود طاقة DC متغير",
+    "ctaShop": "شراء الموديلات المتوفرة",
+    "ctaQuote": "طلب عرض سعر للكميات",
+    "ctaHint": "متاح الشراء المباشر مع دعم فني لطلبات المواصفات المخصصة.",
+    "globalFootprint": "انتشار عالمي",
+    "trustedBy": "موثوق لدى قادة الصناعة",
+    "technicalSeries": "السلاسل التقنية والمواصفات",
+    "updated": "آخر تحديث",
+    "keyTakeaways": "نقاط رئيسية",
+    "keywordBreadcrumbHome": "الرئيسية",
+    "keywordBreadcrumbSeries": "السلسلة",
+    "keywordSpecCtaTitle": "طلب وشراء مع دعم فني",
+    "keywordSpecCtaDesc": "اشترِ مزودات طاقة DC المتوفرة الآن، أو تواصل معنا لأسعار الكميات، مدة التوريد، والتخصيص.",
+    "keywordSpecCtaBtn": "شراء واستفسار",
+    "keywordBack": "العودة إلى الكتالوج"
+  },
+  "categories": {
+    "High Voltage Series": "سلسلة الجهد العالي",
+    "Standard Voltage Series": "سلسلة الجهد القياسي",
+    "Low Voltage Series": "سلسلة الجهد المنخفض",
+    "Performance & Output": "الأداء والمخرج",
+    "Chassis & Form Factor": "الهيكل ونمط التركيب",
+    "Buying Resources": "موارد الشراء"
+  }
+}

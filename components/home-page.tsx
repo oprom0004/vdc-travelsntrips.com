@@ -4,7 +4,7 @@ import { ChevronRight, Cpu, Settings, ShieldCheck, Zap } from "lucide-react";
 import type { ArticleData } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
 import { getMessages, translateCategory, withLocalePrefix } from "@/lib/i18n";
-import { CORE_KEYWORD, getFrenchShortTitle, getTargetHomeUrl, HOME_HERO_IMAGE, KEYWORD_PAGES } from "@/lib/site";
+import { CORE_KEYWORD, getArabicShortTitle, getFrenchShortTitle, getTargetHomeUrl, hasArabicVariant, HOME_HERO_IMAGE, KEYWORD_PAGES } from "@/lib/site";
 
 export default function HomePage({ homeContent, locale = "en" }: { homeContent: ArticleData | null; locale?: Locale }) {
   const now = new Date();
@@ -12,6 +12,7 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
   const currentYear = now.getFullYear();
   const messages = getMessages(locale);
   const targetHomeUrl = getTargetHomeUrl(locale);
+  const catalogPages = locale === "ar" ? KEYWORD_PAGES.filter((page) => hasArabicVariant(page.slug)) : KEYWORD_PAGES;
   const stats = locale === "fr"
     ? [
         { label: "Plage de tension", value: "0 - 800V DC" },
@@ -19,6 +20,13 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
         { label: "Resolution", value: "10mV / 1mA" },
         { label: "Marche", value: "Industrie mondiale" },
       ]
+    : locale === "ar"
+      ? [
+          { label: "مدى الجهد", value: "0 - 800V DC" },
+          { label: "منطق التحكم", value: "Etomsys DSP" },
+          { label: "الدقة", value: "10mV / 1mA" },
+          { label: "السوق", value: "صناعي عالمي" },
+        ]
     : [
         { label: "Voltage Range", value: "0 - 800V DC" },
         { label: "Control Logic", value: "Etomsys DSP" },
@@ -27,6 +35,8 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
       ];
   const industryLogos = locale === "fr"
     ? ["Fabricants Fortune 500", "Laboratoires de recherche", "OEM automobiles mondiaux", "Leaders semiconducteurs"]
+    : locale === "ar"
+      ? ["مصنعو Fortune 500", "مختبرات بحث متقدمة", "شركات سيارات عالمية", "عمالقة أشباه الموصلات"]
     : ["Fortune 500 Manufacturers", "Top-Tier Research Labs", "Global Automotive OEMs", "Semiconductor Giants"];
   const applications = locale === "fr"
     ? [
@@ -35,6 +45,13 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
         { title: "Aerospatial", desc: "Avionique et systemes satellite", icon: ShieldCheck },
         { title: "Industrie", desc: "Automatisation et controle moteur", icon: Settings },
       ]
+    : locale === "ar"
+      ? [
+          { title: "أشباه الموصلات", desc: "اختبارات الرقاقة والحرق", icon: Cpu },
+          { title: "السيارات", desc: "أنظمة EV والبطاريات", icon: Zap },
+          { title: "الطيران والفضاء", desc: "إلكترونيات الطيران والأقمار", icon: ShieldCheck },
+          { title: "الصناعة", desc: "الأتمتة والتحكم بالمحركات", icon: Settings },
+        ]
     : [
         { title: "Semiconductor", desc: "Wafer testing & burn-in", icon: Cpu },
         { title: "Automotive", desc: "EV powertrain & battery", icon: Zap },
@@ -48,6 +65,13 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
         { title: "Support mondial", desc: "Service technique et distribution complete." },
         { title: "Securite", desc: "Protections redondantes OVP/OCP." },
       ]
+    : locale === "ar"
+      ? [
+          { title: "تحكم Etomsys", desc: "حلقة تحكم رقمية باستجابة سريعة." },
+          { title: "ثبات عالي", desc: "تموج منخفض لاختبارات دقيقة." },
+          { title: "دعم عالمي", desc: "دعم تقني وقنوات توزيع متكاملة." },
+          { title: "السلامة أولاً", desc: "حمايات OVP/OCP متعددة الطبقات." },
+        ]
     : [
         { title: "Etomsys Logic", desc: "Microsecond-level digital control loop." },
         { title: "High Stability", desc: "Ultra-low ripple for sensitive testing." },
@@ -62,6 +86,11 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
         {locale === "fr" && (
           <p className="mt-2 text-[12px] text-brand-muted">
             Egalement recherche sous le terme "variable dc power supply" en sourcing international.
+          </p>
+        )}
+        {locale === "ar" && (
+          <p className="mt-2 text-[12px] text-brand-muted">
+            كذلك يُبحث عنه أيضاً بمصطلح "variable dc power supply" في التوريد الدولي.
           </p>
         )}
       </header>
@@ -136,19 +165,19 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {Array.from(new Set(KEYWORD_PAGES.map((p) => p.category))).map((category) => (
+          {Array.from(new Set(catalogPages.map((p) => p.category))).map((category) => (
             <div key={category}>
               <h4 className="text-[12px] font-[900] text-brand-primary uppercase tracking-[2px] mb-6 flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-brand-primary"></div>
                 {translateCategory(locale, category)}
               </h4>
               <ul className="space-y-1">
-                {KEYWORD_PAGES.filter((p) => p.category === category).map((page) => (
+                {catalogPages.filter((p) => p.category === category).map((page) => (
                   <li key={page.slug}>
                     <Link href={withLocalePrefix(locale, `/${page.slug}`)} className="group flex items-center justify-between py-2.5 border-b border-transparent hover:border-brand-border/30 transition-all">
                       <div className="flex flex-col">
                         <span className="text-[14px] font-[600] text-brand-muted group-hover:text-brand-secondary transition-colors">
-                          {locale === "fr" ? getFrenchShortTitle(page) : page.shortTitle}
+                          {locale === "fr" ? getFrenchShortTitle(page) : locale === "ar" ? getArabicShortTitle(page) : page.shortTitle}
                         </span>
                         <span className="text-[9px] text-brand-muted/60 uppercase font-bold group-hover:text-brand-primary transition-colors">
                           {page.baseSlug.includes("v") ? `Up to ${page.baseSlug.toUpperCase()}` : "Precision Control"}

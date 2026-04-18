@@ -2,9 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { cache } from "react";
 import type { Locale } from "@/lib/i18n";
-import { findKeywordPageByBaseSlug, getFrenchKeyword } from "@/lib/site";
+import { AR_MVP_SLUGS, findKeywordPageByBaseSlug, getArabicKeyword, getFrenchKeyword } from "@/lib/site";
 import frHome from "@/content/fr/home.json";
 import frKeywordTemplate from "@/content/fr/keyword-template.json";
+import arHome from "@/content/ar/home.json";
+import arKeywordTemplate from "@/content/ar/keyword-template.json";
 
 export interface ArticleSection {
   heading: string;
@@ -55,6 +57,26 @@ function buildFrenchKeywordContent(baseSlug: string): ArticleData | null {
   };
 }
 
+function buildArabicKeywordContent(baseSlug: string): ArticleData | null {
+  const page = findKeywordPageByBaseSlug(baseSlug);
+  if (!page) return null;
+  if (!AR_MVP_SLUGS.includes(page.slug)) return null;
+
+  const tokens = {
+    keyword: getArabicKeyword(page),
+    shortTitle: page.shortTitle,
+  };
+
+  return {
+    title: replaceTokens(arKeywordTemplate.title, tokens),
+    summary: replaceTokens(arKeywordTemplate.summary, tokens),
+    sections: arKeywordTemplate.sections.map((section) => ({
+      heading: replaceTokens(section.heading, tokens),
+      content: replaceTokens(section.content, tokens),
+    })),
+  };
+}
+
 export function getCachedContent(key: string) {
   const cacheMap = readRawCache();
   return cacheMap[key] ?? null;
@@ -64,6 +86,9 @@ export function getHomeContent(locale: Locale = "en") {
   if (locale === "fr") {
     return frHome as ArticleData;
   }
+  if (locale === "ar") {
+    return arHome as ArticleData;
+  }
 
   return getCachedContent("home");
 }
@@ -71,6 +96,9 @@ export function getHomeContent(locale: Locale = "en") {
 export function getKeywordContent(baseSlug: string, locale: Locale = "en") {
   if (locale === "fr") {
     return buildFrenchKeywordContent(baseSlug);
+  }
+  if (locale === "ar") {
+    return buildArabicKeywordContent(baseSlug);
   }
 
   const primaryKey = `keyword_${baseSlug}`;

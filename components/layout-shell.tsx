@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { getFrenchShortTitle, getTargetHomeUrl, KEYWORD_PAGES } from "@/lib/site";
+import { AR_MVP_SLUGS, getArabicShortTitle, getFrenchShortTitle, getTargetHomeUrl, hasArabicVariant, KEYWORD_PAGES } from "@/lib/site";
 import { getLocaleFromPathname, getMessages, translateCategory, type Locale, withLocalePrefix } from "@/lib/i18n";
 
 export default function LayoutShell({ children }: { children: ReactNode }) {
@@ -19,8 +19,10 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
   const langMenuRef = useRef<HTMLDivElement | null>(null);
   const targetHomeUrl = getTargetHomeUrl(locale);
 
-  const categories = useMemo(() => Array.from(new Set(KEYWORD_PAGES.map((page) => page.category))), []);
+  const visiblePages = useMemo(() => (locale === "ar" ? KEYWORD_PAGES.filter((page) => hasArabicVariant(page.slug)) : KEYWORD_PAGES), [locale]);
+  const categories = useMemo(() => Array.from(new Set(visiblePages.map((page) => page.category))), [visiblePages]);
   const homePath = withLocalePrefix(locale, "/");
+  const arSlugSet = useMemo(() => new Set(AR_MVP_SLUGS), []);
 
   useEffect(() => {
     const onClickOutside = (event: MouseEvent) => {
@@ -37,10 +39,10 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const preferred = window.localStorage.getItem("preferred_locale");
-      if (preferred !== "en" && preferred !== "fr") return;
+      if (preferred !== "en" && preferred !== "fr" && preferred !== "ar") return;
       if (preferred === locale) return;
-      if (pathname !== "/" && pathname !== "/fr") return;
-      router.replace(preferred === "fr" ? "/fr" : "/");
+      if (pathname !== "/" && pathname !== "/fr" && pathname !== "/ar") return;
+      router.replace(preferred === "en" ? "/" : `/${preferred}`);
     } catch {
       // ignore storage issues
     }
@@ -50,12 +52,23 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
     const basePath = pathname || "/";
     const search = typeof window !== "undefined" ? window.location.search : "";
     const hash = typeof window !== "undefined" ? window.location.hash : "";
+    let normalizedPath = basePath;
+    if (normalizedPath === "/fr" || normalizedPath === "/ar") {
+      normalizedPath = "/";
+    } else if (normalizedPath.startsWith("/fr/") || normalizedPath.startsWith("/ar/")) {
+      normalizedPath = normalizedPath.replace(/^\/(fr|ar)/, "");
+    }
 
-    let nextPath = basePath;
+    let nextPath = normalizedPath;
     if (targetLocale === "fr") {
-      nextPath = basePath.startsWith("/fr") ? basePath : basePath === "/" ? "/fr" : `/fr${basePath}`;
-    } else {
-      nextPath = basePath.startsWith("/fr") ? (basePath === "/fr" ? "/" : basePath.replace(/^\/fr/, "")) : basePath;
+      nextPath = normalizedPath === "/" ? "/fr" : `/fr${normalizedPath}`;
+    } else if (targetLocale === "ar") {
+      if (normalizedPath === "/") {
+        nextPath = "/ar";
+      } else {
+        const slug = normalizedPath.slice(1);
+        nextPath = arSlugSet.has(slug) ? `/ar/${slug}` : "/ar";
+      }
     }
 
     return `${nextPath}${search}${hash}`;
@@ -73,9 +86,10 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
   };
 
   const activeLangLabel = locale.toUpperCase();
+  const isArabic = locale === "ar";
 
   return (
-    <div className="min-h-screen flex flex-col bg-brand-bg">
+    <div className="min-h-screen flex flex-col bg-brand-bg" dir={isArabic ? "rtl" : "ltr"} lang={locale}>
       <header className="sticky top-0 z-50 bg-white border-b-[3px] border-brand-primary h-[70px] flex items-center professional-shadow">
         <div className="w-full max-w-[1440px] mx-auto px-10 flex justify-between items-center">
           <Link href={homePath} className="flex items-center gap-2">
@@ -91,7 +105,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
               <li><Link href={withLocalePrefix(locale, "/#applications")} className="text-[13px] font-[700] uppercase text-brand-secondary hover:text-brand-primary transition-colors">{messages.ui.navApplications}</Link></li>
               <li><Link href={withLocalePrefix(locale, "/variable-dc-power-supply-high-voltage")} className="text-[13px] font-[700] uppercase text-brand-secondary hover:text-brand-primary transition-colors">{messages.ui.navHighVoltage}</Link></li>
               <li><Link href={withLocalePrefix(locale, "/variable-dc-power-supply-high-precision")} className="text-[13px] font-[700] uppercase text-brand-secondary hover:text-brand-primary transition-colors">{messages.ui.navPrecision}</Link></li>
-              <li><Link href={withLocalePrefix(locale, "/variable-dc-power-supply-how-to-use")} className="text-[13px] font-[700] uppercase text-brand-secondary hover:text-brand-primary transition-colors">{messages.ui.navSupport}</Link></li>
+              <li><Link href={locale === "ar" ? "/ar/variable-dc-power-supply-where-to-buy" : withLocalePrefix(locale, "/variable-dc-power-supply-how-to-use")} className="text-[13px] font-[700] uppercase text-brand-secondary hover:text-brand-primary transition-colors">{messages.ui.navSupport}</Link></li>
               <li>
                 <a
                   href={targetHomeUrl}
@@ -128,6 +142,13 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
                       >
                         FR
                       </button>
+                      <button
+                        type="button"
+                        onClick={() => switchLocale("ar")}
+                        className={`w-full text-left px-3 py-1.5 text-xs font-bold uppercase hover:bg-slate-50 ${locale === "ar" ? "text-brand-primary" : "text-brand-secondary"}`}
+                      >
+                        AR
+                      </button>
                     </div>
                   )}
                 </div>
@@ -145,7 +166,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
             <Link href={withLocalePrefix(locale, "/#catalog")} className="block text-sm font-bold uppercase text-brand-secondary" onClick={() => setIsMenuOpen(false)}>{messages.ui.navCatalog}</Link>
             <Link href={withLocalePrefix(locale, "/#applications")} className="block text-sm font-bold uppercase text-brand-secondary" onClick={() => setIsMenuOpen(false)}>{messages.ui.navApplications}</Link>
             <Link href={withLocalePrefix(locale, "/variable-dc-power-supply-high-voltage")} className="block text-sm font-bold uppercase text-brand-secondary" onClick={() => setIsMenuOpen(false)}>{messages.ui.navHighVoltage}</Link>
-            <Link href={withLocalePrefix(locale, "/variable-dc-power-supply-how-to-use")} className="block text-sm font-bold uppercase text-brand-secondary" onClick={() => setIsMenuOpen(false)}>{messages.ui.mobileSupportGuide}</Link>
+            <Link href={locale === "ar" ? "/ar/variable-dc-power-supply-where-to-buy" : withLocalePrefix(locale, "/variable-dc-power-supply-how-to-use")} className="block text-sm font-bold uppercase text-brand-secondary" onClick={() => setIsMenuOpen(false)}>{messages.ui.mobileSupportGuide}</Link>
             <a href={targetHomeUrl} target="_blank" rel="nofollow" className="block text-sm font-bold uppercase text-brand-accent">{messages.ui.navInventory}</a>
             <div className="pt-2 border-t border-brand-border">
               <div className="text-[11px] font-black uppercase text-brand-muted mb-2">Language</div>
@@ -164,6 +185,13 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
                 >
                   FR
                 </button>
+                <button
+                  type="button"
+                  onClick={() => switchLocale("ar")}
+                  className={`px-3 py-1 rounded border text-xs font-bold uppercase ${locale === "ar" ? "bg-brand-primary text-white border-brand-primary" : "bg-white text-brand-secondary border-brand-border"}`}
+                >
+                  AR
+                </button>
               </div>
             </div>
           </div>
@@ -176,10 +204,10 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
             <div key={category}>
               <div className="text-[11px] font-[700] uppercase text-brand-muted tracking-[1px] mb-3">{translateCategory(locale, category)}</div>
               <div className="flex flex-wrap gap-2">
-                {KEYWORD_PAGES.filter((page) => page.category === category).map((page) => {
+                {visiblePages.filter((page) => page.category === category).map((page) => {
                   const href = withLocalePrefix(locale, `/${page.slug}`);
                   const active = pathname === href;
-                  const label = locale === "fr" ? getFrenchShortTitle(page) : page.shortTitle;
+                  const label = locale === "fr" ? getFrenchShortTitle(page) : locale === "ar" ? getArabicShortTitle(page) : page.shortTitle;
                   return (
                     <Link
                       key={page.slug}

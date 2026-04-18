@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import KeywordPage from "@/components/keyword-page";
 import { getKeywordContent } from "@/lib/content";
-import { findKeywordPage, KEYWORD_PAGES, SITE_URL } from "@/lib/site";
+import { findKeywordPage, hasArabicVariant, KEYWORD_PAGES, SITE_URL } from "@/lib/site";
 import { getMessages } from "@/lib/i18n";
 
 export function generateStaticParams() {
@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       languages: {
         en: `/${page.slug}`,
         fr: `/fr/${page.slug}`,
+        ...(hasArabicVariant(page.slug) ? { ar: `/ar/${page.slug}` } : {}),
       },
     },
     openGraph: {
