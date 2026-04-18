@@ -83,6 +83,10 @@ export function getKeywordContent(baseSlug: string, locale: Locale = "en") {
     return getCachedContent("keyword_high-precision");
   }
 
+  if (baseSlug === "rack-mount") {
+    return getCachedContent("keyword_benchtop");
+  }
+
   if (baseSlug === "high-precision") {
     return getCachedContent("keyword_precision");
   }

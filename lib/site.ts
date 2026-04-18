@@ -14,6 +14,7 @@ const SKU_IMAGE_BY_BASE_SLUG: Record<string, string> = {
   "triple-output": "/triple-output-dc-power-supply-etm-dm-kkk.png",
   "high-precision": "/etm-k8011spl-high-precision-variable-dc-power-supply.png",
   "high-voltage": "/800v-etm-8006.png",
+  "rack-mount": "/etm-3050u.png",
 };
 
 const FALLBACK_SKU_IMAGE = "/high-precision-linear-variable-dc-power-supply-etmi301spv-2.png";
@@ -61,6 +62,7 @@ const RAW_KEYWORDS: RawKeyword[] = [
   { kw: "triple output", cat: "Performance & Output", path: "triple-output-bench-power-supplies/", customH1: "Triple Output Variable DC Power Supply: Multi-Rail Circuit Prototyping", customSEO: "Triple Output Variable DC Power Supply | Multi-Channel Benchtop" },
   { kw: "high voltage", cat: "Performance & Output", path: "high-voltage-dc-power-supply/", customH1: "High Voltage Variable DC Power Supply: Industrial & Scientific Solutions", customSEO: "High Voltage Variable DC Power Supply Specialist" },
   { kw: "benchtop", cat: "Chassis & Form Factor", path: "bench-dc-power-supply/", customH1: "Benchtop Variable DC Power Supply: Industrial Power on Your Desk", customSEO: "Industrial Benchtop Variable DC Power Supply Units" },
+  { kw: "rack mount", cat: "Chassis & Form Factor", customH1: "Rack Mount Variable DC Power Supply: 19-Inch Industrial Integration Ready", customSEO: "Rack Mount Variable DC Power Supply | Industrial 19-Inch Power Systems" },
   { kw: "price", cat: "Buying Resources", customH1: "Variable DC Power Supply Price Guide: Wholesale & Custom Quotes", customSEO: "Variable DC Power Supply Price List & Quote Guide" },
   { kw: "where to buy", cat: "Buying Resources", customH1: "Where to Buy a Variable DC Power Supply: Authorized Global Partners", customSEO: "Authorized eTommens Dealers - Where to Buy Variable DC Power Supply" },
   { kw: "how to use", cat: "Buying Resources", customH1: "How to Use a Variable DC Power Supply: A Master Guide for Engineers", customSEO: "How to Use a Variable DC Power Supply | Operation & Safety Guide" },
@@ -112,6 +114,7 @@ export function getFrenchKeyword(page: KeywordPageData): string {
     "triple-output": "Alimentation DC variable triple sortie",
     "high-voltage": "Alimentation DC variable haute tension",
     "benchtop": "Alimentation DC variable de table",
+    "rack-mount": "Alimentation DC variable rack mount",
     "price": "Prix alimentation DC variable",
     "where-to-buy": "Ou acheter une alimentation DC variable",
     "how-to-use": "Comment utiliser une alimentation DC variable",
@@ -136,6 +139,7 @@ export function getFrenchShortTitle(page: KeywordPageData): string {
     "triple-output": "TRIPLE SORTIE",
     "high-voltage": "HAUTE TENSION",
     "benchtop": "DE TABLE",
+    "rack-mount": "RACK MOUNT",
     "price": "PRIX",
     "where-to-buy": "OU ACHETER",
     "how-to-use": "COMMENT UTILISER",
