@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { getTargetHomeUrl, KEYWORD_PAGES } from "@/lib/site";
+import { getFrenchShortTitle, getTargetHomeUrl, KEYWORD_PAGES } from "@/lib/site";
 import { getLocaleFromPathname, getMessages, translateCategory, type Locale, withLocalePrefix } from "@/lib/i18n";
 
 export default function LayoutShell({ children }: { children: ReactNode }) {
@@ -179,6 +179,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
                 {KEYWORD_PAGES.filter((page) => page.category === category).map((page) => {
                   const href = withLocalePrefix(locale, `/${page.slug}`);
                   const active = pathname === href;
+                  const label = locale === "fr" ? getFrenchShortTitle(page) : page.shortTitle;
                   return (
                     <Link
                       key={page.slug}
@@ -189,7 +190,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
                           : "bg-[#eef2f7] text-brand-primary border-brand-border hover:border-brand-primary"
                       }`}
                     >
-                      {page.shortTitle}
+                      {label}
                     </Link>
                   );
                 })}

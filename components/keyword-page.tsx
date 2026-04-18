@@ -73,7 +73,7 @@ export default function KeywordPage({ pageData, content, locale = "en" }: { page
           <strong className="text-brand-secondary block mb-1">{messages.ui.keywordSpecCtaTitle}</strong>
           <p className="text-[13px] text-[#856404]">{messages.ui.keywordSpecCtaDesc}</p>
         </div>
-        <a href={pageData.targetPath ? `${TARGET_URL}/${pageData.targetPath}` : targetHomeUrl} target="_blank" rel="nofollow" className="btn-accent whitespace-nowrap px-8">
+        <a href={pageData.targetPath ? `${TARGET_URL}/${pageData.targetPath}` : targetHomeUrl} target="_blank" className="btn-accent whitespace-nowrap px-8">
           {messages.ui.keywordSpecCtaBtn}
         </a>
       </div>

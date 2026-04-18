@@ -4,7 +4,7 @@ import { ChevronRight, Cpu, Settings, ShieldCheck, Zap } from "lucide-react";
 import type { ArticleData } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
 import { getMessages, translateCategory, withLocalePrefix } from "@/lib/i18n";
-import { CORE_KEYWORD, getTargetHomeUrl, HOME_HERO_IMAGE, KEYWORD_PAGES } from "@/lib/site";
+import { CORE_KEYWORD, getFrenchShortTitle, getTargetHomeUrl, HOME_HERO_IMAGE, KEYWORD_PAGES } from "@/lib/site";
 
 export default function HomePage({ homeContent, locale = "en" }: { homeContent: ArticleData | null; locale?: Locale }) {
   const now = new Date();
@@ -147,7 +147,9 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
                   <li key={page.slug}>
                     <Link href={withLocalePrefix(locale, `/${page.slug}`)} className="group flex items-center justify-between py-2.5 border-b border-transparent hover:border-brand-border/30 transition-all">
                       <div className="flex flex-col">
-                        <span className="text-[14px] font-[600] text-brand-muted group-hover:text-brand-secondary transition-colors">{page.shortTitle}</span>
+                        <span className="text-[14px] font-[600] text-brand-muted group-hover:text-brand-secondary transition-colors">
+                          {locale === "fr" ? getFrenchShortTitle(page) : page.shortTitle}
+                        </span>
                         <span className="text-[9px] text-brand-muted/60 uppercase font-bold group-hover:text-brand-primary transition-colors">
                           {page.baseSlug.includes("v") ? `Up to ${page.baseSlug.toUpperCase()}` : "Precision Control"}
                         </span>
@@ -195,7 +197,7 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
               ))}
             </ul>
             <div className="mt-10 pt-6 border-t border-white/10">
-              <a href={targetHomeUrl} target="_blank" rel="nofollow" className="btn-accent w-full block text-center py-3 text-xs font-bold uppercase tracking-wider">{messages.ui.navInventory}</a>
+              <a href={targetHomeUrl} target="_blank" className="btn-accent w-full block text-center py-3 text-xs font-bold uppercase tracking-wider">{messages.ui.navInventory}</a>
             </div>
           </div>
         </aside>

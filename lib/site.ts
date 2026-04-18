@@ -127,3 +127,19 @@ export function getFrenchKeyword(page: KeywordPageData): string {
 
   return `Alimentation DC variable ${page.shortTitle}`;
 }
+
+export function getFrenchShortTitle(page: KeywordPageData): string {
+  const bySlug: Record<string, string> = {
+    "linear-variable": "LINEAIRE VARIABLE",
+    "high-precision": "HAUTE PRECISION",
+    "programmable": "PROGRAMMABLE",
+    "triple-output": "TRIPLE SORTIE",
+    "high-voltage": "HAUTE TENSION",
+    "benchtop": "DE TABLE",
+    "price": "PRIX",
+    "where-to-buy": "OU ACHETER",
+    "how-to-use": "COMMENT UTILISER",
+  };
+
+  return bySlug[page.baseSlug] ?? page.shortTitle;
+}
