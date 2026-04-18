@@ -59,6 +59,11 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
     <div className="p-10 flex flex-col gap-10 max-w-6xl mx-auto">
       <header>
         <h1 className="text-[32px] font-[800] text-brand-secondary leading-tight uppercase">{messages.ui.homeHeroTitle || `Professional ${CORE_KEYWORD} Solutions`}</h1>
+        {locale === "fr" && (
+          <p className="mt-2 text-[12px] text-brand-muted">
+            Egalement recherche sous le terme \"variable dc power supply\" en sourcing international.
+          </p>
+        )}
       </header>
 
       <section className="bg-white rounded-lg border border-brand-border p-8 card-shadow grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-8">
