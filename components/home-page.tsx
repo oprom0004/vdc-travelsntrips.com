@@ -61,7 +61,7 @@ export default function HomePage({ homeContent, locale = "en" }: { homeContent: 
         <h1 className="text-[32px] font-[800] text-brand-secondary leading-tight uppercase">{messages.ui.homeHeroTitle || `Professional ${CORE_KEYWORD} Solutions`}</h1>
         {locale === "fr" && (
           <p className="mt-2 text-[12px] text-brand-muted">
-            Egalement recherche sous le terme \"variable dc power supply\" en sourcing international.
+            Egalement recherche sous le terme "variable dc power supply" en sourcing international.
           </p>
         )}
       </header>
