@@ -2,13 +2,20 @@ import type { Metadata } from "next";
 import LayoutShell from "@/components/layout-shell";
 import "./globals.css";
 import { HOME_HERO_IMAGE, SITE_URL, TARGET_URL } from "@/lib/site";
+import { getMessages } from "@/lib/i18n";
+
+const messages = getMessages("en");
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Professional Variable DC Power Supply Solutions | eTommens Official Technical Hub",
-  description: "Technical resource center for variable DC power supply systems, including high-voltage, programmable, and precision lineup pages.",
+  title: messages.meta.homeTitle,
+  description: messages.meta.homeDescription,
   alternates: {
     canonical: "/",
+    languages: {
+      en: "/",
+      fr: "/fr",
+    },
   },
   icons: {
     icon: "/favicon.svg",
@@ -16,10 +23,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Professional Variable DC Power Supply Solutions",
-    description: "Industrial variable DC power supply expertise and technical specifications.",
+    title: messages.meta.ogTitle,
+    description: messages.meta.ogDescription,
     url: SITE_URL,
-    siteName: "TRAVELSNTRIPS Industrial Tech",
+    siteName: messages.meta.siteName,
     images: [
       {
         url: HOME_HERO_IMAGE,
@@ -31,8 +38,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Variable DC Power Supply Solutions",
-    description: "Industrial variable DC power supply expertise and technical specifications.",
+    title: messages.meta.ogTitle,
+    description: messages.meta.ogDescription,
     images: [HOME_HERO_IMAGE],
   },
 };

@@ -1,0 +1,22 @@
+{
+  "title": "{{keyword}} - specifications techniques",
+  "summary": "{{keyword}} pour usage industriel et laboratoire: alimentation stable, controle precis, protections integrees et support commande/devis.",
+  "sections": [
+    {
+      "heading": "Presentation technique",
+      "content": "Le modele {{keyword}} est concu pour les applications de test, validation et integration industrielle.\nIl offre une regulation fiable pour garantir des mesures repetables et une alimentation propre des charges sensibles."
+    },
+    {
+      "heading": "Parametres electriques et controle",
+      "content": "La configuration {{shortTitle}} prend en charge un pilotage fin de la tension et du courant avec bonne stabilite en charge.\nL'interface de controle facilite l'integration en atelier, laboratoire et ligne de production."
+    },
+    {
+      "heading": "Securite et fiabilite",
+      "content": "Des mecanismes de protection OVP/OCP aident a proteger l'equipement teste et la source d'alimentation.\nLa conception vise une exploitation continue avec maintenance simplifiee en contexte industriel."
+    },
+    {
+      "heading": "Commande en ligne et devis volume",
+      "content": "Les modeles standards sont disponibles en ligne sur variabledcpowersupply.com pour un achat rapide.\nPour projets OEM, besoins multi-postes ou specifications specifiques, contactez-nous pour un devis detaille."
+    }
+  ]
+}

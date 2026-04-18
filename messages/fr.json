@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "homeTitle": "Acheter une alimentation DC variable en ligne | Hub technique officiel",
+    "homeDescription": "Centre technique pour alimentations DC variables: modeles haute tension, programmables et haute precision.",
+    "ogTitle": "Acheter une alimentation DC variable en ligne",
+    "ogDescription": "Specifications techniques et commande en ligne pour alimentations DC variables industrielles.",
+    "siteName": "TRAVELSNTRIPS Industrial Tech",
+    "notFoundTitle": "Page introuvable",
+    "notFoundDescription": "La page technique demandee n'existe pas."
+  },
+  "ui": {
+    "navCatalog": "Catalogue",
+    "navApplications": "Applications",
+    "navHighVoltage": "Haute tension",
+    "navPrecision": "Haute precision",
+    "navSupport": "Support",
+    "navInventory": "Stock & prix",
+    "mobileSupportGuide": "Guide support",
+    "languageSwitch": "EN",
+    "footer": "Division technique de travelsntrips.com. Tous droits reserves. Ingenierie de precision pour l'alimentation industrielle.",
+    "homeHeroTitle": "Solutions professionnelles d'alimentation DC variable",
+    "ctaShop": "Acheter les modeles en stock",
+    "ctaQuote": "Demander un devis volume",
+    "ctaHint": "Commande en ligne disponible. Demande technique pour exigences tension/courant sur mesure.",
+    "globalFootprint": "Presence mondiale",
+    "trustedBy": "Fiable pour les leaders industriels",
+    "technicalSeries": "Series techniques et specifications",
+    "updated": "Mise a jour",
+    "keyTakeaways": "Points cles",
+    "keywordBreadcrumbHome": "Accueil",
+    "keywordBreadcrumbSeries": "Serie",
+    "keywordSpecCtaTitle": "Commande en ligne et support devis",
+    "keywordSpecCtaDesc": "Achetez des alimentations DC en stock en ligne, ou contactez-nous pour prix volume, delais et configurations sur mesure.",
+    "keywordSpecCtaBtn": "Acheter et demander",
+    "keywordBack": "Retour au catalogue"
+  },
+  "categories": {
+    "High Voltage Series": "Serie haute tension",
+    "Standard Voltage Series": "Serie tension standard",
+    "Low Voltage Series": "Serie basse tension",
+    "Performance & Output": "Performance et sortie",
+    "Chassis & Form Factor": "Chassis et format",
+    "Buying Resources": "Ressources achat"
+  }
+}

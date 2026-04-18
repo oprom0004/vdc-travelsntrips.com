@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import KeywordPage from "@/components/keyword-page";
 import { getKeywordContent } from "@/lib/content";
-import { findKeywordPage, KEYWORD_PAGES, SITE_URL } from "@/lib/site";
+import { findKeywordPage, getFrenchKeyword, KEYWORD_PAGES } from "@/lib/site";
 import { getMessages } from "@/lib/i18n";
+
+const messages = getMessages("fr");
 
 export function generateStaticParams() {
   return KEYWORD_PAGES.map((page) => ({ slug: page.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const messages = getMessages("en");
   const { slug } = await params;
   const page = findKeywordPage(slug);
   if (!page) {
@@ -20,12 +21,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       robots: { index: false, follow: false },
     };
   }
+  const frKeyword = getFrenchKeyword(page);
 
   return {
-    title: page.seoTitle,
-    description: page.description,
+    title: `${frKeyword} | Achat en ligne`,
+    description: `Acheter ${frKeyword} en ligne avec support devis industriel et livraison rapide.`,
     alternates: {
-      canonical: `/${page.slug}`,
+      canonical: `/fr/${page.slug}`,
       languages: {
         en: `/${page.slug}`,
         fr: `/fr/${page.slug}`,
@@ -33,25 +35,25 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     openGraph: {
       type: "article",
-      title: page.seoTitle,
-      description: page.description,
-      url: `${SITE_URL}/${page.slug}`,
+      title: `${frKeyword} | Achat en ligne`,
+      description: `Specifications et commande pour ${frKeyword}.`,
+      url: `https://travelsntrips.com/fr/${page.slug}`,
     },
     twitter: {
       card: "summary",
-      title: page.seoTitle,
-      description: page.description,
+      title: `${frKeyword} | Achat en ligne`,
+      description: `Specifications et commande pour ${frKeyword}.`,
     },
   };
 }
 
-export default async function SlugPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function FrSlugPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const page = findKeywordPage(slug);
   if (!page) {
     notFound();
   }
 
-  const content = getKeywordContent(page.baseSlug, "en");
-  return <KeywordPage pageData={page} content={content} locale="en" />;
+  const content = getKeywordContent(page.baseSlug, "fr");
+  return <KeywordPage pageData={page} content={content} locale="fr" />;
 }

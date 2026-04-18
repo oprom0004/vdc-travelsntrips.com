@@ -1,6 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { cache } from "react";
+import type { Locale } from "@/lib/i18n";
+import { findKeywordPageByBaseSlug, getFrenchKeyword } from "@/lib/site";
+import frHome from "@/content/fr/home.json";
+import frKeywordTemplate from "@/content/fr/keyword-template.json";
 
 export interface ArticleSection {
   heading: string;
@@ -28,16 +32,47 @@ const readRawCache = cache((): Record<string, ArticleData> => {
   }
 });
 
+function replaceTokens(text: string, tokens: Record<string, string>) {
+  return Object.entries(tokens).reduce((acc, [key, value]) => acc.replaceAll(`{{${key}}}`, value), text);
+}
+
+function buildFrenchKeywordContent(baseSlug: string): ArticleData | null {
+  const page = findKeywordPageByBaseSlug(baseSlug);
+  if (!page) return null;
+
+  const tokens = {
+    keyword: getFrenchKeyword(page),
+    shortTitle: page.shortTitle,
+  };
+
+  return {
+    title: replaceTokens(frKeywordTemplate.title, tokens),
+    summary: replaceTokens(frKeywordTemplate.summary, tokens),
+    sections: frKeywordTemplate.sections.map((section) => ({
+      heading: replaceTokens(section.heading, tokens),
+      content: replaceTokens(section.content, tokens),
+    })),
+  };
+}
+
 export function getCachedContent(key: string) {
   const cacheMap = readRawCache();
   return cacheMap[key] ?? null;
 }
 
-export function getHomeContent() {
+export function getHomeContent(locale: Locale = "en") {
+  if (locale === "fr") {
+    return frHome as ArticleData;
+  }
+
   return getCachedContent("home");
 }
 
-export function getKeywordContent(baseSlug: string) {
+export function getKeywordContent(baseSlug: string, locale: Locale = "en") {
+  if (locale === "fr") {
+    return buildFrenchKeywordContent(baseSlug);
+  }
+
   const primaryKey = `keyword_${baseSlug}`;
   const fromPrimary = getCachedContent(primaryKey);
   if (fromPrimary) {

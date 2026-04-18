@@ -89,9 +89,41 @@ export function findKeywordPage(slug: string) {
   return KEYWORD_PAGES.find((page) => page.slug === slug);
 }
 
+export function findKeywordPageByBaseSlug(baseSlug: string) {
+  return KEYWORD_PAGES.find((page) => page.baseSlug === baseSlug);
+}
+
 export function getKeywordImage(baseSlug: string) {
   if (/\d+v$/i.test(baseSlug)) {
     return "/800v-etm-8006.png";
   }
   return SKU_IMAGE_BY_BASE_SLUG[baseSlug] ?? FALLBACK_SKU_IMAGE;
+}
+
+export function getTargetHomeUrl(locale: "en" | "fr" = "en") {
+  return locale === "fr" ? `${TARGET_URL}/fr` : TARGET_URL;
+}
+
+export function getFrenchKeyword(page: KeywordPageData): string {
+  const bySlug: Record<string, string> = {
+    "linear-variable": "Alimentation DC variable lineaire",
+    "high-precision": "Alimentation DC variable haute precision",
+    "programmable": "Alimentation DC variable programmable",
+    "triple-output": "Alimentation DC variable triple sortie",
+    "high-voltage": "Alimentation DC variable haute tension",
+    "benchtop": "Alimentation DC variable de table",
+    "price": "Prix alimentation DC variable",
+    "where-to-buy": "Ou acheter une alimentation DC variable",
+    "how-to-use": "Comment utiliser une alimentation DC variable",
+  };
+
+  if (bySlug[page.baseSlug]) {
+    return bySlug[page.baseSlug];
+  }
+
+  if (/\d+v$/i.test(page.baseSlug) || /\d+a$/i.test(page.baseSlug) || /\d+w$/i.test(page.baseSlug)) {
+    return `Alimentation DC variable ${page.shortTitle}`;
+  }
+
+  return `Alimentation DC variable ${page.shortTitle}`;
 }

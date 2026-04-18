@@ -13,6 +13,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const frKeywordEntries = KEYWORD_PAGES.map((page) => ({
+    url: `${SITE_URL}/fr/${page.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.6,
+  }));
+
   return [
     {
       url: SITE_URL,
@@ -20,6 +27,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 1,
     },
+    {
+      url: `${SITE_URL}/fr`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
     ...keywordEntries,
+    ...frKeywordEntries,
   ];
 }

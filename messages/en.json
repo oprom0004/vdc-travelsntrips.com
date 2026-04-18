@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "homeTitle": "Professional Variable DC Power Supply Solutions | eTommens Official Technical Hub",
+    "homeDescription": "Technical resource center for variable DC power supply systems, including high-voltage, programmable, and precision lineup pages.",
+    "ogTitle": "Professional Variable DC Power Supply Solutions",
+    "ogDescription": "Industrial variable DC power supply expertise and technical specifications.",
+    "siteName": "TRAVELSNTRIPS Industrial Tech",
+    "notFoundTitle": "Page Not Found",
+    "notFoundDescription": "The technical page you requested does not exist."
+  },
+  "ui": {
+    "navCatalog": "Catalog",
+    "navApplications": "Applications",
+    "navHighVoltage": "High Voltage",
+    "navPrecision": "Precision Units",
+    "navSupport": "Support",
+    "navInventory": "Inventory & Pricing",
+    "mobileSupportGuide": "Support Guide",
+    "languageSwitch": "FR",
+    "footer": "travelsntrips.com Technical Division. All rights reserved. Precision Engineering for Industrial Power.",
+    "homeHeroTitle": "Professional variable dc power supply Solutions",
+    "ctaShop": "Shop In-Stock Models",
+    "ctaQuote": "Request Bulk Quote",
+    "ctaHint": "Online ordering available. Engineering inquiry for custom voltage/current specs.",
+    "globalFootprint": "Global Footprint",
+    "trustedBy": "Trusted by Industry Leaders",
+    "technicalSeries": "Technical Series & Specifications",
+    "updated": "Updated",
+    "keyTakeaways": "Key Takeaways",
+    "keywordBreadcrumbHome": "Home",
+    "keywordBreadcrumbSeries": "Series",
+    "keywordSpecCtaTitle": "Online Ordering with Inquiry Support",
+    "keywordSpecCtaDesc": "Purchase in-stock DC power supplies online, or contact us for bulk pricing, lead time, and custom configurations.",
+    "keywordSpecCtaBtn": "Shop & Inquire",
+    "keywordBack": "Back to Catalog Index"
+  },
+  "categories": {
+    "High Voltage Series": "High Voltage Series",
+    "Standard Voltage Series": "Standard Voltage Series",
+    "Low Voltage Series": "Low Voltage Series",
+    "Performance & Output": "Performance & Output",
+    "Chassis & Form Factor": "Chassis & Form Factor",
+    "Buying Resources": "Buying Resources"
+  }
+}
