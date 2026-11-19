@@ -63,6 +63,9 @@ const schemaData = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <script defer src="https://umamimy.vercel.app/script.js" data-website-id="d7579987-6dcc-4d1a-811a-d739e031cc45" />
+      </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
         <LayoutShell>{children}</LayoutShell>
